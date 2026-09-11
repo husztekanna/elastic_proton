@@ -1,0 +1,16 @@
+# Ignore everything by default
+*
+
+# But allow these
+!.gitignore
+!Makefile
+!definitions.h
+!*.C
+
+# Except these specific .C files (re-ignore them)
+califa_vs_t2_22O.C
+califa_vs_t2_24F.C
+delta_production_mul2.C
+make_data_anna_copy.C
+mandelstam_t_comparison.C
+theta_cm_comparison.C
