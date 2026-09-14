@@ -1,3 +1,30 @@
+
+// Shared constants, helper functions, and templates used across the 
+// analysis macros. Included via #include "definitions.h" in files that 
+// need FRS/CALIFA/FOOT data structures and R3B tracking classes.
+//
+// Contents:
+//   - Physical constants: SPEED_OF_LIGHT, LOS_TO_FOOT5_DISTANCE, NEUTRON_MASS
+//   - momentum_after_energy_loss(): corrects momentum for energy loss/gain 
+//     through a target (incoming vs outgoing particle)
+//   - CreateHistograms<HistT>(): templated helper to batch-create a vector 
+//     of histograms with sequential names
+//   - PlotOnCanvas<THist>(): templated helper to draw a vector of histograms 
+//     onto a divided canvas (auto-selects "colz" for 2D, log-y for 1D)
+//   - extractFromTCA<T>(): extracts a member value from every object in a 
+//     TClonesArray via a member-function pointer
+//   - appendVector(): concatenates a vector of histograms into a TH1* vector
+//   - vertex struct + get_vertex(): computes the distance-of-closest-approach 
+//     vertex between two tracked particles from their positions/slopes
+//   - IsInsideEllipse(): checks whether a (z, A/Z) point falls inside an 
+//     elliptical PID gate
+//   - Init_A_and_Z(): identifies fragment A/Z from FRS PID ellipse cuts 
+//     (currently only Z=9, A=25 active; other isotope gates commented out)
+//
+// Depends on: R3BRoot classes (R3BFootHitData, R3BHit, R3BFrsData, 
+// R3BCalifaClusterData, R3BTofdHitData, R3BNeulandHit/Cluster, 
+// R3BTrackingParticle, etc.), ROOT Minuit2/GSL minimizer libraries
+
 #include <TFile.h>
 #include <TTree.h>
 #include <TVector3.h>
