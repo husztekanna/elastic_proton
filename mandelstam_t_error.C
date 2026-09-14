@@ -1,3 +1,19 @@
+
+// Plots the analytic uncertainty on Mandelstam t as a function of scattering 
+// angle theta_scattering, propagated from a fixed angular resolution 
+// (error_theta_scattering = 0.0004 rad), independent of any data file.
+//
+// Formula matches the err_mandelstam_t calculation used in 
+// elastic_proton_scattering.C.
+//
+// Output: mandelstam_t_error.png, mandelstam_t_error.root (TF1 + TCanvas)
+// Usage:  root -l mandelstam_t_error.C
+//
+// Note: constants here (mp, p_inc, e_inc) are hardcoded in GeV, whereas the 
+// same quantities in elastic_proton_scattering.C are computed per-event in 
+// MeV — check these match the specific beam/fragment case you're 
+// illustrating before reusing this for a different energy.
+
 #include <TCanvas.h>
 #include <TF1.h>
 #include <TFile.h>
