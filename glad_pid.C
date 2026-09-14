@@ -1,3 +1,21 @@
+
+// Fills a GLAD-spectrometer PID histogram (A/Q vs Z) from raw fragment 
+// tracking data, unfiltered by any A/Q or Z gate — used to inspect the full 
+// PID spectrum before deciding on isotope-selection cuts (compare against 
+// FRS PID from format_frs_pid.C).
+//
+// Applies only a basic trigger filter (header->GetTrigger() == 1) and 
+// requires at least one fragment track with positive Z and A/Q.
+//
+// Depends on: definitions.h
+//
+// Input:  /lustre/r3b/vpanin/G249/rootfiles_neuland_clustering/main0158_0008.root
+//         (TChain "evt")
+// Output: glad_pid_cocktailbeam.root (TH2F "h2_glad_pid")
+// Usage:  compiled as a standalone executable (has main()): ./plot_glad_pid
+//         (can also be run interactively as a ROOT macro via 
+//         plot_glad_pid_unfiltered())
+
 #include "R3BEventHeader.h"
 #include "R3BTrackingParticle.h"
 #include "definitions.h"
@@ -12,7 +30,7 @@
 
 using namespace std;
 
-void plot_glad_pid_unfiltered()
+void glad_pid()
 {
     gStyle->SetOptStat(0);
 
