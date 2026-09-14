@@ -1,3 +1,22 @@
+// Monte Carlo phase-space simulation (TGenPhaseSpace) of 25F -> 25F + proton 
+// two-body breakup, for the ground state and three excited states of 25F 
+// (excitation energies 100, 2.5, 4 MeV), used as a reference/comparison for 
+// the phi correlation cuts applied to real data.
+//
+// For each state, generates 1,000,000 phase-space events and fills:
+//   - px vs py of the 25F fragment (ground state only)
+//   - phi_califa vs phi_proton 2D correlation histograms (one per state)
+//   - scatter graphs (capped at 5000 points) of the same correlation, 
+//     overlaid for visual comparison across states
+//
+// Output: phase_space_25F_p_proton.root (or _delta.root if useDelta = kTRUE)
+//         — histograms + overlay canvas
+// Usage:  root -l phase_space_25F_p.C
+//
+// Toggle: set `useDelta = kTRUE` at the top to simulate breakup into a Delta 
+// baryon instead of a proton.
+
+
 #include <TLorentzVector.h>
 #include <TFile.h>
 #include <TParameter.h>
