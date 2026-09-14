@@ -1,3 +1,25 @@
+// Applies the full set of kinetic cuts (theta_califa, vertex_z, phi 
+// correlation, track-matching, phi exclusion) to the 22O/24F/25F datasets 
+// and produces the full set of comparison and diagnostic plots.
+//
+// Produces:
+//   - theta_cm distributions (weighted by 1/sin(theta_cm)) for all 3 isotopes,
+//     normalized and overlaid  -> theta_cm_comparison.C, theta_cm_<frag>.png
+//   - Mandelstam -t distributions, normalized and overlaid -> mandelstam_t_comparison.C,
+//     mandelstam_t_<frag>.png
+//   - Per-isotope diagnostic plots: px vs py, vertex x-y, vertex-z, 
+//     phi_califa vs phi_proton, phi_califa - phi_proton, CALIFA energy vs T2 
+//     (with calculated reference curve overlaid)
+//   - Saves all histograms/canvases to plot_with_cuts.root (or 
+//     plot_without_cuts.root if applyCuts = false)
+//
+// Input:  analysis_output_22O.root, analysis_output_24F.root, analysis_output_25F.root
+//         (each containing a TTree named "tree")
+// Output: plot_with_cuts.root / plot_without_cuts.root, plus various .png files
+// Usage:  root -l applying_cuts.C
+//
+// Toggle: set `applyCuts = false` at the top of applying_cuts() to skip all cuts.
+
 #include <TCanvas.h>
 #include <TString.h>
 #include <TFile.h>
