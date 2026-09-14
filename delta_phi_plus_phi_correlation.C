@@ -1,3 +1,17 @@
+// Compares the phi coplanarity distribution (Phi_missing - Phi_proton) for 
+// 25F with and without analysis cuts applied, overlaid on one plot, with a 
+// 2D phi-phi correlation histogram (uncut, log-z) shown as an inset.
+//
+// Input:  plot_without_cuts.root, plot_with_cuts.root (both must contain 
+//         "phi_califa_minus_phi_proton_25F"; plot_without_cuts.root must 
+//         also contain "phi_califa_vs_phi_proton_25F" for the inset)
+// Output: phi_califa_minus_phi_proton_25F_with_inset.png
+// Usage:  root -l overlay_cuts.C
+//
+// Note: mean/sigma values shown in the stat box (Mean = -0.314 ± 0.052 deg,
+// Sigma = 4.604 ± 0.041 deg) are hardcoded text, not computed from the fit —
+// update these manually if the underlying data/cuts change.
+
 #include <TCanvas.h>
 #include <TPad.h>
 #include <TFile.h>
@@ -7,7 +21,7 @@
 #include <TPaveText.h>
 #include <TStyle.h>
 
-void overlay_cuts() {
+void delta_phi_plus_phi_correlation() {
     gStyle->SetOptStat(0); // Turn off statistics box
 
     // 1. Open both ROOT files
