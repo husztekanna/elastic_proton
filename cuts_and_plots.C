@@ -35,7 +35,7 @@ void FormatHistogram(TH1 *h) {
     h->GetYaxis()->SetTitleFont(62); // Bold
 }
 
-void cuts_and_plots() {
+void applying_cuts() {
 
   // Data points for T2 (x) and CALIFA energy (y) in MeV
   const int nPoints = 17;
