@@ -1,3 +1,33 @@
+// Main event-loop analysis for proton elastic scattering
+// reaction. Reads raw R3B tree data for a chosen outgoing 
+// fragment, reconstructs kinematics event-by-event, and writes out a slim tree 
+// of physics variables plus diagnostic histograms.
+//
+// Per event:
+//   - Requires exactly 1 CALIFA cluster above CALIFA_THRESHOLD, valid FRS PID,
+//     valid incoming/outgoing/alpide tracks, a TOFD hit
+//   - Applies a fragment-specific AoQ/Z gate (configureFragmentParameters) to 
+//     select the outgoing isotope (24O, 24F, 23F, 23O, 22O, or 25F)
+//   - Corrects incoming/outgoing momenta for target energy loss 
+//     (momentum_after_energy_loss, from definitions.h)
+//   - Reconstructs the target vertex from track intersection (get_vertex)
+//   - Computes fragment momentum in the incoming-beam frame, missing mass/momentum,
+//     Mandelstam t (and its propagated error), scattering angle, and theta_cm
+//
+// Depends on: definitions.h (constants + helper functions)
+//
+// Input:  /lustre/r3b/vpanin/G249/.../filtered_<fragment>_to_all.root (TChain "evt")
+// Output: analysis_output_<fragment>.root — contains "tree" (event-level physics
+//         variables: frag_px/py/pz, vertex_x/y/z, theta_cm, mandelstam_t, 
+//         err_mandelstam_t, theta_califa, phi_califa, T2, TX_diff/TY_diff, etc.)
+//         plus a set of raw diagnostic histograms (FRS PID, vertex, CALIFA, 
+//         missing mass, etc.)
+//
+// Usage:  compiled as a standalone executable (has main()):
+//           ./elastic_proton_scattering [24O|24F|23F|23O|22O|25F]
+//         defaults to 25F if no argument given.
+//         (Can also be run as a ROOT macro via analyse_all("25F") if loaded interactively.)
+
 #include "definitions.h"
 const double CALIFA_THRESHOLD = 5000; // keV: for no califa:1000, for califa: 15000
 using namespace std;
