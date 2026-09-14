@@ -1,3 +1,24 @@
+
+// Fills a GLAD-spectrometer PID histogram (A/Q vs Z) for a chosen outgoing 
+// fragment, requiring >=1 CALIFA hit above threshold — used as a refined PID 
+// check after applying the same CALIFA-hit condition used in the main 
+// analysis (elastic_proton_scattering.C), to see how the PID spectrum looks 
+// under that cut, without isotope gates on A/Q or Z.
+//
+// Depends on: definitions.h
+//
+// Input:  /lustre/r3b/vpanin/G249/rootfiles_neuland_clustering/filtered/
+//         filtered_<fragment>_to_all.root (TChain "evt")
+// Output: glad_pid_<fragment>.root (TH2F "h2_glad_pid"), 
+//         glad_pid_califa_<fragment>.png
+// Usage:  compiled as a standalone executable (has main()): ./plot_glad_pid
+//         (defaults to "25F"; edit main() to change fragment, or call 
+//         plot_glad_pid("<fragment>") interactively)
+//
+// Note: applies a +0.04 offset to A/Q (frag_AoQ) before filling — a 
+// calibration correction; check this is still the right value if 
+// conditions/calibration change.
+
 #include <TChain.h>
 
 #include <TH2F.h>
