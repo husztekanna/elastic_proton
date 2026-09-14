@@ -1,4 +1,17 @@
-void format_frs_pid() {
+// Loads the raw FRS PID histogram (A/Q vs Z) and re-plots it with clean 
+// formatting (no title/stats box, styled axis labels, zoomed-in range) 
+// for use in presentations/thesis.
+//
+// Input:  frs_pid_cocktailbeam.root (must contain TH2F "h2_frs_pid")
+// Output: frs_pid_formatted.png
+// Usage:  root -l format_frs_pid.C
+//
+// Note: X-axis is zoomed to A/Q = 2.65-2.8, Y-axis to Z = 7.0-10.5 
+// (covers the F/O isotope region) — adjust SetRangeUser() if plotting a 
+// different beam/isotope selection.
+
+
+void frs_pid() {
     // 1. Turn off the stats box globally
     gStyle->SetOptStat(0);
 
